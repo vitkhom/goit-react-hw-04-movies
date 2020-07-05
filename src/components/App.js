@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Navigation from './Navigation';
 
-// import Loader from '../common/Loader';
 import routes from '../utils/routes';
 import './App.scss';
 
