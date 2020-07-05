@@ -1,0 +1,16 @@
+.movie-details {
+  .info {
+    .info__button {
+      margin-bottom: 10px;
+    }
+    .info__wrapper {
+      display: flex;
+
+      .info__img {
+        width: 200px;
+        height: 300px;
+        margin-right: 10px;
+      }
+    }
+  }
+}

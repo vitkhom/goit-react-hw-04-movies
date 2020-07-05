@@ -1,0 +1,16 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  list-style: none;
+
+  &__link {
+    color: blue($color: #000000);
+    text-transform: uppercase;
+    font-weight: 800;
+  }
+
+  &__link-active {
+    color: red;
+  }
+}
