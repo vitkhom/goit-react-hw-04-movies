@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Searchbox.scss';
 
 class Searchbox extends Component {
   state = { value: '' };

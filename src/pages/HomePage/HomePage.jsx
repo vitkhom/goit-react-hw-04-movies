@@ -52,7 +52,14 @@ class HomePage extends Component {
             <ul>
               {movies.map(({ id, original_title }) => (
                 <li key={id}>
-                  <Link to={`${routes.movies}/${id}`}>{original_title}</Link>
+                  <Link
+                    to={{
+                      pathname: `${routes.movies}/${id}`,
+                      state: { from: this.props.location },
+                    }}
+                  >
+                    {original_title}
+                  </Link>
                 </li>
               ))}
             </ul>

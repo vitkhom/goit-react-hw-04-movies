@@ -1,10 +1,20 @@
 .cast {
   .cast__list {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: ;
+
     .cast__list-item {
       list-style: none;
+      width: 200px;
+      height: 280px;
+      text-align: center;
+
       .cast__list-img {
+        display: block;
         width: 100px;
         height: 150px;
+        margin: 0 auto;
       }
     }
   }

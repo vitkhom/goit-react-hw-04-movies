@@ -4,14 +4,16 @@ import { Link, Route, Switch } from 'react-router-dom';
 import Loader from '../../common/Loader';
 import movieByIdAPI from '../../utils/movieByIdAPI';
 import routes from '../../utils/routes';
+import imageUrl from '../../utils/imageUrl';
 import './MovieDetailsPage.scss';
 
-const Cast = lazy(() => import('../Cast'));
-const Reviews = lazy(() => import('../Reviews'));
+const Cast = lazy(() => import('../../components/Cast'));
+const Reviews = lazy(() => import('../../components/Reviews'));
 
 class MovieDetailsPage extends Component {
   state = {
     movie: null,
+    query: '',
   };
 
   componentDidMount() {
@@ -20,22 +22,30 @@ class MovieDetailsPage extends Component {
       .then(movie => this.setState({ movie }));
   }
 
+  handleGoBack = () => {
+    const { state } = this.props.location;
+
+    if (state && state.from) {
+      this.props.history.push(state.from);
+    }
+  };
+
   render() {
     const { movie } = this.state;
-    const { match, history } = this.props;
+    const { match } = this.props;
 
     return (
       <>
         {movie && (
           <div className="movie-details">
             <div className="info">
-              <button className="info__button" onClick={history.goBack}>
+              <button className="info__button" onClick={this.handleGoBack}>
                 &larr; Go back
               </button>
               <div className="info__wrapper">
                 <img
                   className="info__img"
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  src={`${imageUrl.baseUrl}/${movie.poster_path}`}
                   alt=""
                 />
                 <div className="info__detales">
@@ -59,12 +69,26 @@ class MovieDetailsPage extends Component {
               <h4>Additional information</h4>
               <ul>
                 <li>
-                  <Link to={`${routes.movies}/${match.params.movieId}/cast`}>
+                  <Link
+                    to={{
+                      pathname: `${routes.movies}/${match.params.movieId}/cast`,
+                      state: {
+                        from: this.props.location.state.from,
+                      },
+                    }}
+                  >
                     Cast
                   </Link>
                 </li>
                 <li>
-                  <Link to={`${routes.movies}/${match.params.movieId}/reviews`}>
+                  <Link
+                    to={{
+                      pathname: `${routes.movies}/${match.params.movieId}/reviews`,
+                      state: {
+                        from: this.props.location.state.from,
+                      },
+                    }}
+                  >
                     Reviews
                   </Link>
                 </li>

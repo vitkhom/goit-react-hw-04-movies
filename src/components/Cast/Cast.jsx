@@ -6,7 +6,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import castByIdAPI from '../../utils/castByIdAPI';
+import imageUrl from '../../utils/imageUrl';
 import './Cast.scss';
+
+import noImage from '../../img/no_photo.jpg';
 
 class Cast extends Component {
   state = {
@@ -49,21 +52,30 @@ class Cast extends Component {
           <div className="cast">
             {cast && (
               <ul className="cast__list">
-                {cast
-                  .filter(item => item.profile_path !== null)
-                  .map(({ cast_id, profile_path, name, character }) => (
-                    <li className="cast__list-item" key={cast_id}>
+                {cast.map(({ cast_id, profile_path, name, character }) => (
+                  <li className="cast__list-item" key={cast_id}>
+                    {profile_path ? (
                       <img
                         className="cast__list-img"
-                        src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
+                        src={`${imageUrl.baseUrl}/${profile_path}`}
                         alt=""
                       />
-                      <h3 className="cast__list-title">{name}</h3>
-                      <p className="cast__list-description">
-                        Character: {character}
-                      </p>
-                    </li>
-                  ))}
+                    ) : (
+                      <img
+                        className="cast__list-img"
+                        src={noImage}
+                        alt=""
+                        width="100"
+                        height="200"
+                      />
+                    )}
+
+                    <h3 className="cast__list-title">{name}</h3>
+                    <p className="cast__list-description">
+                      Character: {character}
+                    </p>
+                  </li>
+                ))}
               </ul>
             )}
           </div>

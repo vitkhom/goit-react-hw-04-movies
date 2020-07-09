@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Searchbox from '../Searchbox';
+import Searchbox from '../../components/Searchbox';
 import queryString from 'query-string';
 import movieByQueryAPI from '../../utils/movieByQueryAPI';
 import routes from '../../utils/routes';
@@ -70,7 +70,14 @@ class MoviesPage extends Component {
           <ul>
             {movies.map(({ id, original_title }) => (
               <li key={id}>
-                <Link to={`${routes.movies}/${id}`}>{original_title}</Link>
+                <Link
+                  to={{
+                    pathname: `${routes.movies}/${id}`,
+                    state: { from: this.props.location },
+                  }}
+                >
+                  {original_title}
+                </Link>
               </li>
             ))}
           </ul>
